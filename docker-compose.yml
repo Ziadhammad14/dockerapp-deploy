@@ -1,12 +1,17 @@
-version: "3d"
+version: "3"
 services:
   node-app:
-    container_name: testing-container
     image: ziadhammaf/docker-repos
-    ports:
-      - "4000:4000"
     env_file:
-      - ./.env  
+      - ./.env
+    deploy:  
+      replicas: 4
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
     depends_on:
       - mongo
       - redis  

@@ -1,6 +1,7 @@
     const express = require('express');
     const mongoose = require('mongoose');
     const redis = require('redis');
+    const os = require('os')
     //const {Clinet, Client} = require('pg')
 
     // init app
@@ -44,8 +45,9 @@
 
 
     app.get('/',(req , res) =>{
-    redisClient.set('prodects', 'products...')       
-    res.send('<h1> Hello world form AWS using docker hub </h1>')
+    redisClient.set('prodects', 'products...')
+    console.log(`traffic from ${os.hostname}`);       
+    res.send('<h1> Hello world from zooz with wahchtower again  </h1>')
     });
 
     app.get('/data',     async (req , res) =>{
