@@ -1,7 +1,8 @@
 version: "3d"
 services:
   node-app:
-    container_name: testing-container 
+    container_name: testing-container
+    image: ziadhammaf/docker-repos
     ports:
       - "4000:4000"
     env_file:
