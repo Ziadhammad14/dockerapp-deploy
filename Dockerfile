@@ -1,20 +1,24 @@
-FROM node:18 as base 
-
-FROM base as development 
+FROM node:14
 
 WORKDIR /app 
+
 COPY package.json .
-RUN npm install
+
+ARG NODE_ENV
+
+RUN if [ "$NODE_ENV" = "development"]; \
+    then npm install;\
+    else npm install --only-production; \
+    fi
+    
+# if my app become big with many files i can make the copy like this => COPY . .
 COPY . .
-EXPOSE 80
+
+ENV PORT 3000
+
+# i say here that my app is running om port 4000
+EXPOSE $PORT
+    
+# we will began to run the app by this 
 CMD ["npm", "run", "start-dev" ]
-
-FROM base as production 
-
-WORKDIR /app 
-COPY package.json .
-RUN npm install --only=production
-COPY . .
-EXPOSE 4000
-CMD ["npm", "start" ]
     
